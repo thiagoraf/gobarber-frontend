@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { FormHandles } from "@unform/core";
 import { useAuth } from "../../hooks/auth";
 import { useToast } from "../../hooks/toast";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import logoImg from "../../assets/logo.svg";
 
@@ -26,7 +26,7 @@ const SignIn: React.FC = () => {
   const { user, signIn } = useAuth();
   const { addToast } = useToast();
 
-  console.log(user);
+  const history = useHistory();
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -47,6 +47,8 @@ const SignIn: React.FC = () => {
           email: data.email,
           password: data.password,
         });
+
+        history.push("/dashboard");
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -60,7 +62,7 @@ const SignIn: React.FC = () => {
         return;
       }
     },
-    [signIn, addToast]
+    [signIn, addToast, history]
   );
 
   return (
