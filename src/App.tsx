@@ -4,13 +4,14 @@ import GlobalStyle from "./styles/global";
 import Routes from "./routes";
 import { BrowserRouter } from "react-router-dom";
 
-import { AuthProvider } from "./hooks/AuthContext";
+import ToastContainer from "./components/ToastContainer";
+import AppProvider from "./hooks";
 
 const App: React.FC = () => (
   <BrowserRouter>
-    <AuthProvider>
+    <AppProvider>
       <Routes />
-    </AuthProvider>
+    </AppProvider>
 
     <GlobalStyle />
   </BrowserRouter>
